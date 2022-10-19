@@ -1,5 +1,8 @@
 package engtelecom.poo;
 
+import java.util.Arrays;
+import java.util.Random;
+
 /**
  * Class made to simulate a space robot
  * 
@@ -12,6 +15,14 @@ public class Robot {
     private final String ID;
     /** Area where the robot can explore */
     private final int AREA;
+    /** Valid Directions where the robot can point */
+    public static final String[] DIRECTIONS = { "North", "East", "West", "South" };
+    /** Clockwise attribute */
+    public static final String CLOCKWISE = "E";
+    /** Anticlockwise attribute */
+    public static final String ANTICLOCKWISE = "D";
+    /** String with the commands possible to load */
+    public static final String COMMANDS = "EDM";
 
     /** Coordinates where is the robot */
     private int[] coordinatesNow;
@@ -24,7 +35,7 @@ public class Robot {
     /** Unities that the robot moves per command */
     private int unitsMove;
     /** String that save the list of commands that will run */
-    private String LoadedCommands;
+    private String loadedCommands;
     // Private Methods
 
     /**
@@ -33,8 +44,31 @@ public class Robot {
      * @param area
      * @return
      */
-    private int[][] randomizeCoordinates(int area) {
-        return null;
+    private int[] randomizeCoordinates() {
+        Random r = new Random();
+        int[] randomCoordinates = { r.nextInt(AREA), r.nextInt(AREA) };
+        return randomCoordinates;
+    }
+
+    /**
+     * Methods setCoordinatesNow ,
+     * Just verifies if conditions
+     */
+    private void setCoordinatesNow(int[] coordinatesNow) {
+        if ((0 <= coordinatesNow[0] && coordinatesNow[0] <= AREA)
+                && (0 <= coordinatesNow[1] && coordinatesNow[1] <= AREA)) {
+            this.coordinatesNow = coordinatesNow;
+        } else {
+            this.coordinatesNow = randomizeCoordinates();
+        }
+    }
+
+    private void setDirection(String direction) {
+        if (Arrays.asList(DIRECTIONS).contains(direction)) {
+            this.direction = direction;
+        } else {
+            this.direction = DIRECTIONS[0];
+        }
     }
 
     // Public Methods
@@ -53,8 +87,8 @@ public class Robot {
     public Robot(String id, int area, int[] coordinatesNow, String direction, int maxMoves, int unitsMove) {
         ID = id;
         AREA = area;
-        this.coordinatesNow = coordinatesNow;
-        this.direction = direction;
+        this.setCoordinatesNow(coordinatesNow);
+        this.setDirection(direction);
         this.maxMoves = maxMoves;
         this.unitsMove = unitsMove;
     }
@@ -66,7 +100,7 @@ public class Robot {
      * @return - Returns a string coordinates[] and direction pointed
      */
     public String getCoordinatesNow() {
-        return null;
+        return (this.coordinatesNow[0] + ", " + this.coordinatesNow[1] + " " + this.direction);
     }
 
     /**
@@ -75,7 +109,7 @@ public class Robot {
      * @return - Returns a string coodinates[]
      */
     public String getCoordinatesBefore() {
-        return null;
+        return (this.coordinatesBefore[0] + ", " + this.coordinatesBefore[1]);
     }
 
     /**
@@ -86,7 +120,24 @@ public class Robot {
      * @return - Returns a string with the direction that is pointing now
      */
     public String spinRobot(String rotation) {
-        return null;
+        // Objective, change de direction where the robot is looking;
+        // Get the position where
+        int pos = Arrays.binarySearch(DIRECTIONS, this.direction);
+
+        if (rotation == CLOCKWISE) {
+            if (pos + 1 >= DIRECTIONS.length)
+                this.direction = DIRECTIONS[0];
+            else
+                this.direction = DIRECTIONS[pos + 1];
+
+        } else if (rotation == ANTICLOCKWISE) {
+
+            if (pos - 1 < 0)
+                this.direction = DIRECTIONS[DIRECTIONS.length - 1];
+            else
+                this.direction = DIRECTIONS[pos - 1];
+        }
+        return this.direction;
     }
 
     /**
@@ -95,7 +146,47 @@ public class Robot {
      * @return - true if possible to move, false if invalid move
      */
     public boolean moveRobot() {
-        return true;
+        // TODO: Work in the moveRobot() method
+        // Objective, be able to read the direction of the robot and move towards that
+        // direction
+        // North , East , Weast , South
+        boolean ableToMove = false;
+        // TODO: Simplify this IFs for 2 methods that receives an int ( 0 for x , 1 for
+        // y ) one that goes foward and other goes back
+        switch (this.direction) {
+            case "North":
+                if (this.coordinatesNow[1] + this.unitsMove <= this.AREA) {
+                    this.coordinatesBefore = this.coordinatesNow;
+                    this.coordinatesNow[1] = this.coordinatesNow[1] + this.unitsMove;
+                }
+                ableToMove = true;
+                break;
+
+            case "East":
+                if (this.coordinatesNow[0] + this.unitsMove <= this.AREA) {
+                    this.coordinatesBefore = this.coordinatesNow;
+                    this.coordinatesNow[0] = this.coordinatesNow[0] + this.unitsMove;
+                }
+                ableToMove = true;
+                break;
+            case "West":
+                if (this.coordinatesNow[0] - this.unitsMove >= 0) {
+                    this.coordinatesBefore = this.coordinatesNow;
+                    this.coordinatesNow[0] = this.coordinatesNow[0] + this.unitsMove;
+                }
+                ableToMove = true;
+                break;
+            case "South":
+                if (this.coordinatesNow[1] - this.unitsMove >= 0) {
+                    this.coordinatesBefore = this.coordinatesNow;
+                    this.coordinatesNow[1] = this.coordinatesNow[1] + this.unitsMove;
+                }
+                ableToMove = true;
+                break;
+        }
+        if (ableToMove)
+            this.maxMoves--;
+        return ableToMove;
     }
 
     /**
@@ -114,7 +205,13 @@ public class Robot {
      * @return - true if able to load , false contrary
      */
     public boolean loadPlanRobot(String plan) {
-        return false;
+        // TODO: Work in the method loadPlanRobot()
+        // Objective : be able to load Valid commands
+        // return false case someone tries to load invalid commands
+        boolean check = plan.matches(COMMANDS);
+        if (check)
+            this.loadedCommands = plan;
+        return check;
     }
 
     /**
@@ -123,6 +220,17 @@ public class Robot {
      * @return - true if able to run , false contrary
      */
     public boolean executePlanRobot() {
+        // TODO: Work in the method executePlanRobot()
+        // Objective: be able to execute Valid commands
+        // return false case some commands break robot rules , like passing limits
+        char first = this.loadedCommands.charAt(0);
+        boolean check = false;
+        if (first == this.COMMANDS.charAt(0) || first == this.COMMANDS.charAt(1)) {
+            this.spinRobot(this.loadedCommands.substring(0));
+        } else {
+            this.moveRobot();
+        }
+        this.loadedCommands = this.loadedCommands.substring(1, this.loadedCommands.length());
         return false;
     }
 
@@ -132,7 +240,7 @@ public class Robot {
      * @return - a string with the remaining commands
      */
     public String remainingPlanRobot() {
-        return null;
+        return this.loadedCommands;
     }
 
 }
