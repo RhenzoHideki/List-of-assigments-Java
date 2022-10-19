@@ -146,7 +146,7 @@ public class Robot {
      * @return - true if possible to move, false if invalid move
      */
     public boolean moveRobot() {
-        // TODO: Work in the moveRobot() method
+        // DONE: Work in the moveRobot() method
         // Objective, be able to read the direction of the robot and move towards that
         // direction
         // North , East , Weast , South
@@ -205,7 +205,7 @@ public class Robot {
      * @return - true if able to load , false contrary
      */
     public boolean loadPlanRobot(String plan) {
-        // TODO: Work in the method loadPlanRobot()
+        // DONE: Work in the method loadPlanRobot()
         // Objective : be able to load Valid commands
         // return false case someone tries to load invalid commands
         boolean check = plan.matches(COMMANDS);
@@ -220,18 +220,20 @@ public class Robot {
      * @return - true if able to run , false contrary
      */
     public boolean executePlanRobot() {
-        // TODO: Work in the method executePlanRobot()
+        // DONE: Work in the method executePlanRobot()
         // Objective: be able to execute Valid commands
         // return false case some commands break robot rules , like passing limits
         char first = this.loadedCommands.charAt(0);
         boolean check = false;
         if (first == this.COMMANDS.charAt(0) || first == this.COMMANDS.charAt(1)) {
             this.spinRobot(this.loadedCommands.substring(0));
+            check = true;
         } else {
             this.moveRobot();
+            check
         }
         this.loadedCommands = this.loadedCommands.substring(1, this.loadedCommands.length());
-        return false;
+        return check;
     }
 
     /**

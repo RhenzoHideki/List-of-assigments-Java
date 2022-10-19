@@ -12,7 +12,7 @@ public class RobotTest {
     // constructor
     // @Test
     // public void robotTest() {
-    // // TODO: Do constructor tests
+    // // DONE: Do constructor tests
     // Robot walle = new Robot("Wall-e", 200, new int[]{5,2}, "North", 30, 3);
 
     // // If valid positive position
@@ -20,7 +20,7 @@ public class RobotTest {
 
     // }
 
-    // TODO: Do tests that involve the moving methods
+    // DONE: Do tests that involve the moving methods
     @Test
     public void moveRobotTest() {
         Robot walle = new Robot("Wall-e", 200, new int[] { 5, 2 }, "North", 30, 3);
@@ -35,7 +35,7 @@ public class RobotTest {
 
     }
 
-    // TODO: Do tests with getCoordinatesNow and getCoordinatesBefore
+    // DONE: Do tests with getCoordinatesNow and getCoordinatesBefore
     @Test
     public void getCoordinatesTest() {
         Robot walle = new Robot("Wall-e", 200, new int[] { 5, 2 }, "North", 30, 3);
@@ -50,7 +50,7 @@ public class RobotTest {
 
     }
 
-    // TODO: Do tests that involve the rotation methods
+    // DONE: Do tests that involve the rotation methods
     @Test
     public void spinRobotTest() {
         Robot walle = new Robot("Wall-e", 200, new int[] { 5, 2 }, "North", 30, 3);
@@ -71,7 +71,7 @@ public class RobotTest {
 
     }
 
-    // TODO: Do tests with remaining moves
+    // DONE: Do tests with remaining moves
     @Test
     public void getRemainingMovesTest() {
         Robot walle = new Robot("Wall-e", 200, new int[] { 5, 2 }, "North", 30, 3);
@@ -85,7 +85,7 @@ public class RobotTest {
 
     @Test
     public void robotPlanTest() {
-        // TODO: Do tests that involve the planning methods
+        // DONE: Do tests that involve the planning methods
         Robot walle = new Robot("Wall-e", 200, new int[] { 5, 2 }, "North", 30, 3);
 
         String plan = new String("MEDMEEMDM");
