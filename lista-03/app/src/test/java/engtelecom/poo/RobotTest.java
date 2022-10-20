@@ -40,14 +40,22 @@ public class RobotTest {
     public void getCoordinatesTest() {
         Robot walle = new Robot("Wall-e", 200, new int[] { 5, 2 }, "North", 30, 3);
 
-        assertEquals("5, 2" + "North", walle.getCoordinatesNow());
+        assertEquals("5, 2" + " North", walle.getCoordinatesNow());
 
         walle.moveRobot();
 
-        assertEquals("5, 5" + "North", walle.getCoordinatesNow());
+        assertEquals("5, 5" + " North", walle.getCoordinatesNow());
 
         assertEquals("5, 2", walle.getCoordinatesBefore());
 
+        // Testis when creating out of area
+        walle = new Robot("Wall-e", 3, new int[] { 5, 2 }, "North", 30, 3);
+        assertTrue(walle.getCoordinates()[0] <= 3 && walle.getCoordinates()[0] >= 0);
+        assertTrue(walle.getCoordinates()[1] <= 3 && walle.getCoordinates()[1] >= 0);
+
+        walle = new Robot("Wall-e", 3, new int[] { -5, -2 }, "North", 30, 3);
+        assertTrue(walle.getCoordinates()[0] <= 3 && walle.getCoordinates()[0] >= 0);
+        assertTrue(walle.getCoordinates()[1] <= 3 && walle.getCoordinates()[1] >= 0);
     }
 
     // DONE: Do tests that involve the rotation methods
@@ -55,19 +63,19 @@ public class RobotTest {
     public void spinRobotTest() {
         Robot walle = new Robot("Wall-e", 200, new int[] { 5, 2 }, "North", 30, 3);
 
-        assertEquals("5, 2" + "North", walle.getCoordinatesNow());
+        assertEquals("5, 2" + " North", walle.getCoordinatesNow());
 
         walle.spinRobot("E");
-        assertEquals("5, 2" + "West", walle.getCoordinatesNow());
+        assertEquals("5, 2" + " West", walle.getCoordinatesNow());
 
         walle.spinRobot("D");
-        assertEquals("5, 2" + "North", walle.getCoordinatesNow());
+        assertEquals("5, 2" + " North", walle.getCoordinatesNow());
 
         walle.spinRobot("D");
-        assertEquals("5, 2" + "East", walle.getCoordinatesNow());
+        assertEquals("5, 2" + " East", walle.getCoordinatesNow());
 
         walle.spinRobot("D");
-        assertEquals("5, 2" + "South", walle.getCoordinatesNow());
+        assertEquals("5, 2" + " South", walle.getCoordinatesNow());
 
     }
 
@@ -110,5 +118,6 @@ public class RobotTest {
             // Show remaining commands
             assertEquals(plan, walle.remainingPlanRobot());
         }
+
     }
 }

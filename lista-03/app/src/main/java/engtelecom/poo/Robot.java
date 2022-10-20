@@ -16,13 +16,13 @@ public class Robot {
     /** Area where the robot can explore */
     private final int AREA;
     /** Valid Directions where the robot can point */
-    public static final String[] DIRECTIONS = { "North", "East", "West", "South" };
+    public static final String[] DIRECTIONS = { "North", "East", "South", "West" };
     /** Clockwise attribute */
-    public static final String CLOCKWISE = "E";
+    public static final String CLOCKWISE = "D";
     /** Anticlockwise attribute */
-    public static final String ANTICLOCKWISE = "D";
+    public static final String ANTICLOCKWISE = "E";
     /** String with the commands possible to load */
-    public static final String COMMANDS = "EDM";
+    public static final String COMMANDS = "(.*)E(.*)(.*)D(.*)(.*)M(.*)";
 
     /** Coordinates where is the robot */
     private int[] coordinatesNow;
@@ -71,6 +71,14 @@ public class Robot {
         }
     }
 
+    static int binarySearch(String[] arr, String x) {
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == x)
+                return i;
+        }
+        return -1;
+    }
+
     // Public Methods
 
     /**
@@ -91,6 +99,10 @@ public class Robot {
         this.setDirection(direction);
         this.maxMoves = maxMoves;
         this.unitsMove = unitsMove;
+    }
+
+    public int[] getCoordinates() {
+        return (this.coordinatesNow);
     }
 
     /**
@@ -122,7 +134,8 @@ public class Robot {
     public String spinRobot(String rotation) {
         // Objective, change de direction where the robot is looking;
         // Get the position where
-        int pos = Arrays.binarySearch(DIRECTIONS, this.direction);
+        int pos = binarySearch(DIRECTIONS, this.direction);
+        // 75454693
 
         if (rotation == CLOCKWISE) {
             if (pos + 1 >= DIRECTIONS.length)
@@ -156,32 +169,35 @@ public class Robot {
         switch (this.direction) {
             case "North":
                 if (this.coordinatesNow[1] + this.unitsMove <= this.AREA) {
-                    this.coordinatesBefore = this.coordinatesNow;
+                    this.coordinatesBefore = this.coordinatesNow.clone();
                     this.coordinatesNow[1] = this.coordinatesNow[1] + this.unitsMove;
+                    ableToMove = true;
                 }
-                ableToMove = true;
+
                 break;
 
             case "East":
                 if (this.coordinatesNow[0] + this.unitsMove <= this.AREA) {
-                    this.coordinatesBefore = this.coordinatesNow;
+                    this.coordinatesBefore = this.coordinatesNow.clone();
                     this.coordinatesNow[0] = this.coordinatesNow[0] + this.unitsMove;
+                    ableToMove = true;
                 }
-                ableToMove = true;
+
                 break;
             case "West":
                 if (this.coordinatesNow[0] - this.unitsMove >= 0) {
-                    this.coordinatesBefore = this.coordinatesNow;
+                    this.coordinatesBefore = this.coordinatesNow.clone();
                     this.coordinatesNow[0] = this.coordinatesNow[0] + this.unitsMove;
+                    ableToMove = true;
                 }
-                ableToMove = true;
+
                 break;
             case "South":
                 if (this.coordinatesNow[1] - this.unitsMove >= 0) {
-                    this.coordinatesBefore = this.coordinatesNow;
+                    this.coordinatesBefore = this.coordinatesNow.clone();
                     this.coordinatesNow[1] = this.coordinatesNow[1] + this.unitsMove;
+                    ableToMove = true;
                 }
-                ableToMove = true;
                 break;
         }
         if (ableToMove)
@@ -230,7 +246,7 @@ public class Robot {
             check = true;
         } else {
             this.moveRobot();
-            check
+            check = true;
         }
         this.loadedCommands = this.loadedCommands.substring(1, this.loadedCommands.length());
         return check;

@@ -9,13 +9,8 @@ public class App {
     }
 
     public static void main(String[] args) {
-        String plan = new String("MEDMEEMDM");
+        Robot walle = new Robot("Wall-e", 200, new int[] { 5, 2 }, "North", 30, 3);
 
-        for (int i = plan.length(); i > 0; i--) {
-            // Execute one command of the list
-            plan = plan.substring(1, plan.length());
-            // Show remaining commands
-        }
+        walle.loadPlanRobot("MEDMEEMDM");
     }
-
 }
