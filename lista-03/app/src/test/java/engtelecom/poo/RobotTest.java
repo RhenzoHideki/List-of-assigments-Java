@@ -8,18 +8,6 @@ import org.junit.jupiter.api.Test;
 
 public class RobotTest {
 
-    // Inconclusive tests , Might as well test the other fuctions instead of
-    // constructor
-    // @Test
-    // public void robotTest() {
-    // // DONE: Do constructor tests
-    // Robot walle = new Robot("Wall-e", 200, new int[]{5,2}, "North", 30, 3);
-
-    // // If valid positive position
-    // assertEquals( new int[]{3,2} + "North", );
-
-    // }
-
     // DONE: Do tests that involve the moving methods
     @Test
     public void moveRobotTest() {
@@ -48,7 +36,7 @@ public class RobotTest {
 
         assertEquals("5, 2", walle.getCoordinatesBefore());
 
-        // Testis when creating out of area
+        // Tests when creating out of area
         walle = new Robot("Wall-e", 3, new int[] { 5, 2 }, "North", 30, 3);
         assertTrue(walle.getCoordinates()[0] <= 3 && walle.getCoordinates()[0] >= 0);
         assertTrue(walle.getCoordinates()[1] <= 3 && walle.getCoordinates()[1] >= 0);
@@ -77,6 +65,8 @@ public class RobotTest {
         walle.spinRobot("D");
         assertEquals("5, 2" + " South", walle.getCoordinatesNow());
 
+        walle.spinRobot("V");
+        assertEquals("5, 2" + " South", walle.getCoordinatesNow());
     }
 
     // DONE: Do tests with remaining moves
@@ -98,17 +88,6 @@ public class RobotTest {
 
         String plan = new String("MEDMEEMDM");
 
-        /*
-         * Initial thoughts about the test
-         * // Load list of commands
-         * assertTrue(walle.loadPlanRobot("MEDMEEMDM"));
-         * // Execute one command of the list
-         * assertTrue(walle.executePlanRobot());
-         * // Show remaining commands
-         * assertEquals("EDMEEMDM", walle.remainingPlanRobot());
-         */
-
-        // More elaborated test
         assertTrue(walle.loadPlanRobot("MEDMEEMDM"));
 
         for (int i = plan.length(); i > 0; i--) {
@@ -118,6 +97,7 @@ public class RobotTest {
             // Show remaining commands
             assertEquals(plan, walle.remainingPlanRobot());
         }
+        assertTrue(walle.loadPlanRobot("MEKMEEMDM"));
 
     }
 }

@@ -99,8 +99,14 @@ public class Robot {
         this.setDirection(direction);
         this.maxMoves = maxMoves;
         this.unitsMove = unitsMove;
+        this.coordinatesBefore = this.coordinatesNow;
     }
 
+    /**
+     * Method Only used for debug
+     * 
+     * @return - Returns the coordinates in Array
+     */
     public int[] getCoordinates() {
         return (this.coordinatesNow);
     }
