@@ -3,12 +3,26 @@
  */
 package Engtelecom.poo;
 
+import java.util.Iterator;
+
 public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
 
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+        Rack r = new Rack();
+        r.addRealMachine("RealTeste1", 16, 500);
+        r.addRealMachine("RealTeste2", 16, 500);
+        System.out.println("Added 2 PCs in the rack");
+
+        r.Computers.get(0).createVm("vm1", 5, 40);
+        r.Computers.get(0).createVm("vm2", 6, 60);
+        System.out.println("Added 2 Virtual Machines in the first Pc");
+
+        r.Computers.get(0).turnOnVm("vm1");
+        r.Computers.get(0).turnOnVm("vm2");
+        System.out.println("Turn on boths VMs in the first Pc");
+
+        System.out.println(r.Computers.get(0).acessVM("vm1"));
+        System.out.println("First : Tries to access a VM in first PC , successfully ");
+
     }
 }
