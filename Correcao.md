@@ -20,7 +20,15 @@
 - Nota: 8
 
 
-# Lista 03
+## Lista 03
 
 - Tudo ok
 - Nota: 10
+
+## Lista 04
+
+- Exercício 02
+  - Uma máquina real deveria ter uma quantidade de memória (e hd) e uma quantidade de memória (e hd) consumida
+  - Não adicionou os comentários nos teste de unidade conforme solicitado.
+- Nota: 10
+  
