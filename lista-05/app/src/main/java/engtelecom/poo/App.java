@@ -3,12 +3,54 @@
  */
 package engtelecom.poo;
 
-public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
+import java.util.ArrayList;
+import java.util.Random;
 
+public class App {
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+        Ferrari ferrari = new Ferrari();
+        Pampa pampa = new Pampa();
+        Panther panther = new Panther();
+
+        ArrayList<Vehicle> vehicle = new ArrayList<Vehicle>();
+
+        // Usando polimorfismo na instrução abaixo
+
+        Random r = new Random();
+        ferrari.speedUp(r.nextInt(200));
+        pampa.speedUp(r.nextInt(200));
+        panther.speedUp(r.nextInt(200));
+
+        vehicle.add(ferrari);
+        vehicle.add(pampa);
+        vehicle.add(panther);
+
+        for (Vehicle x : vehicle) {
+            System.out.println(x.getName() + " " + x.getSpeed());
+        }
+
+        vehicle = new ArrayList<Vehicle>();
+
+        ferrari.brake(r.nextInt(200));
+        pampa.brake(r.nextInt(200));
+        panther.brake(r.nextInt(200));
+
+        vehicle.add(ferrari);
+        vehicle.add(pampa);
+        vehicle.add(panther);
+
+        for (Vehicle x : vehicle) {
+            System.out.println(x.getName() + " " + x.getSpeed());
+        }
+
+        System.out.println(pampa.enableDisableTraction());
+        System.out.println(pampa.enableDisableTraction());
+
+        System.out.println(panther.enableDisableTraction());
+        System.out.println(panther.enableDisableTraction());
+
+        System.out.println(ferrari.closeCoversive());
+        System.out.println(ferrari.openCoversive());
+
     }
 }

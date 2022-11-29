@@ -1,7 +1,7 @@
 package engtelecom.poo;
 
-public interface Convertible {
-    public abstract boolean openCoversive();
+public interface Convertible extends LandVehicle {
+    public String openCoversive();
 
-    public abstract boolean closeCoversive();
+    public String closeCoversive();
 }
