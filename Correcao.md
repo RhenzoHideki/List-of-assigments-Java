@@ -31,4 +31,9 @@
   - Uma máquina real deveria ter uma quantidade de memória (e hd) e uma quantidade de memória (e hd) consumida
   - Não adicionou os comentários nos teste de unidade conforme solicitado.
 - Nota: 10
-  
+    
+## Lista 05
+
+- Tudo ok
+- Nota: 10
+
